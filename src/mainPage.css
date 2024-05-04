@@ -1,0 +1,60 @@
+body{
+    overflow-x: hidden;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center  ;
+    background-image: linear-gradient(to top, #dbdcd7 0%, #dddcd7 24%, #e2c9cc 30%, #e7627d 46%, #b8235a 59%, #801357 71%, #3d1635 84%, #1c1a27 100%);
+
+}
+
+.libre-baskerville-regular {
+    font-family: "Libre Baskerville", serif;
+    font-weight: 400;
+    font-style: normal;
+  } 
+  
+  .libre-baskerville-bold {
+    font-family: "Libre Baskerville", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 5vh;
+    color: #000000;
+  }
+  
+  .libre-baskerville-regular-italic {
+    font-family: "Libre Baskerville", serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+.card{
+    display: block;
+
+    border: 3px #000000 solid;
+    background-color: #ffffff;
+    padding: 3vh;
+    margin-bottom: 1vh;
+    border-radius:  3%;
+    
+}
+
+
+a{
+  text-decoration: none;
+  color: #000000;
+}
+  
+.card:hover{
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
+
+}
+
+
+#logout{
+  text-decoration: underline;
+}
+
