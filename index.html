@@ -3,25 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matchcol</title>
+    <title>MVP project</title>
     <link rel="stylesheet" href="index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
 </head>
 <body>
-
-    <div id="Content">
-    <p class="libre-baskerville-bold">Welcome, register to get in</p>
-    <p>User</p>
-    <input type="text" class="loginForm" id="user">
-    <p>Password</p>
-    <input type="text" class="loginForm" id="passwd"><br/><br/>
-    <a href="./src/mainPage.html" onclick="">Login</a>
-    
-</div>
-
-    <script src="/src/scripts/blockReading.js"></script>
+    <form action="conexion.php" method="POST">
+        <p>User</p>
+        <input type="text" class="loginForm" id="user" name="user">
+        <p>Password</p>
+        <input type="password" class="loginForm" id="passwd" name="passwd"><br/><br/>
+        <input type="submit" value="Login">
+    </form>
 </body>
 </html>
