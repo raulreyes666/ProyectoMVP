@@ -3,11 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="/src/scripts/blockReading.js"></script>
-
+    <title>Edit Worker</title>
 </head>
 <body>
-    
+    <h1>Edit Worker</h1>
+    <form id="editWorkerForm">
+        <label for="worker">Worker Name:</label>
+        <select id="worker" name="worker" required>
+            <option value="">Select a worker</option>
+        </select>
+        <br>
+        <label for="name">New Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="position">New Position:</label>
+        <input type="text" id="position" name="position" required>
+        <br>
+        <button type="submit">Edit Worker</button>
+    </form>
+
+    <script>
+        function loadWorkers() {
+            fetch('https://edwinriose9.000webhostapp.com/read_worker.php')
+                .then(response => response.json())
+                .then(workers => {
+                    const workerSelect = document.getElementById('worker');
+                    workerSelect.innerHTML = '<option value="">Select a worker</option>'; // Clear existing options
+                    workers.forEach(worker => {
+                        const option = document.createElement('option');
+                        option.value = worker.Id;
+                        option.textContent = worker.Name;
+                        workerSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching workers:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadWorkers();
+        });
+
+        document.getElementById('editWorkerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const workerId = document.getElementById('worker').value;
+            const name = document.getElementById('name').value;
+            const position = document.getElementById('position').value;
+            
+            fetch('https://edwinriose9.000webhostapp.com/edit_worker.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: workerId,
+                    name: name,
+                    position: position
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                loadWorkers(); // Reload the workers list
+                document.getElementById('editWorkerForm').reset(); // Clear the form
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
 </body>
 </html>

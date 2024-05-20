@@ -3,11 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="/src/scripts/blockReading.js"></script>
-
+    <title>Delete Worker</title>
 </head>
 <body>
-    
+    <h1>Delete Worker</h1>
+    <form id="deleteWorkerForm">
+        <label for="worker">Worker Name:</label>
+        <select id="worker" name="worker" required>
+            <option value="">Select a worker</option>
+        </select>
+        <br>
+        <button type="submit">Delete Worker</button>
+    </form>
+
+    <script>
+        function loadWorkers() {
+            fetch('https://edwinriose9.000webhostapp.com/read_worker.php')
+                .then(response => response.json())
+                .then(workers => {
+                    const workerSelect = document.getElementById('worker');
+                    workerSelect.innerHTML = '<option value="">Select a worker</option>'; // Clear existing options
+                    workers.forEach(worker => {
+                        const option = document.createElement('option');
+                        option.value = worker.Id;
+                        option.textContent = worker.Name;
+                        workerSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching workers:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadWorkers();
+        });
+
+        document.getElementById('deleteWorkerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const workerId = document.getElementById('worker').value;
+            
+            fetch('https://edwinriose9.000webhostapp.com/delete_worker.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: workerId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                loadWorkers(); // Reload the workers list
+                document.getElementById('deleteWorkerForm').reset(); // Clear the form
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
 </body>
 </html>
